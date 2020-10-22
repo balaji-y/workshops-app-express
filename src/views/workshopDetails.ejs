@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <ul class="nav navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/" exact>Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/workshops">Workshops</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container my-4">
+        <% if( error ){ %>
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <strong>{{error}}</strong>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        <% if( !error ){ %>
+        <div class="row">
+            <div class="col-12 clearfix">
+                <div class="row">
+                    <h2>
+                        <%= workshop.name %>
+                    </h2>
+                    <hr style="width:100%;text-align:left;margin-left:0">
+                
+                    <div class="row my-4">
+                        <div class="col-4">
+                            <img class="img-fluid" src="<%= workshop.imageUrl %>" alt="<%= workshop.name %>" />
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-3">
+                                    <p>
+                                        <small>
+                                            <%= workshop.startDate %>- <%= workshop.endDate %>
+                                        </small>
+                                    </p>
+                                    <p>
+                                        <small class="text-muted">
+                                            <%= workshop.time %>
+                                        </small>
+                                    </p>
+                                </div>
+                                <div class="col-3">
+                                    <p> 
+                                        <i class="<%= workshop.modes.online %>? 'fa fa-check' :'fa fa-times'">
+                                            <small>Online</small>
+                                        </i>
+                                        
+                                    </p>
+                                    <p>
+                                    <i class="<%= workshop.modes.inPerson %>? 'fa fa-check' :'fa fa-times'">
+                                            <small>In Person</small>
+                                        </i>
+                                        
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12"><%- workshop.description %></div>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</body>
+</html>
+        
