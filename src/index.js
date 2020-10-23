@@ -15,9 +15,13 @@ const {dateLogger} = require('./middleware/utils')
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 
-app.use(dateLogger);
+//app.use(dateLogger);
 
 app.use( express.static( path.join( __dirname, 'public' ) ) );
+
+app.use(express.json());
+app.use(express.urlencoded());
+
 app.use(indexRouter);
 app.use('/workshops',workshopsRouter);
 app.use('/api/workshops',apiWorkshopsRouter);

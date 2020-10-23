@@ -16,6 +16,7 @@
             "state": "Karnataka"
         },
         "modes": [ "inPerson" ],
+        "sessions": [],
         "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/2000px-AngularJS_logo.svg.png"
     }
 ]

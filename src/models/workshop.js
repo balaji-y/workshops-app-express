@@ -1,5 +1,31 @@
 const mongoose = require( 'mongoose' );
 
+
+const sessionSchema = new mongoose.Schema({
+    sequenceId : Number,
+    name:{
+        type:String,
+        required:true
+    },
+    speaker: {
+        type:String,
+        required:true
+    },
+    duration: {
+        type:Number,
+        required:true
+    },
+    level:{
+        type:String,
+        enum: ['Basic','Intermediate','Advanced']
+    },
+    description:String,
+    votes:{
+        type:Number,
+        default: 0
+    }
+});
+
 const workshopSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -23,6 +49,10 @@ const workshopSchema = new mongoose.Schema({
     },
     modes: {
         type: [ String ],
+        default: []
+    },
+    sessions:{
+        type: [sessionSchema],
         default: []
     },
     imageUrl: String
