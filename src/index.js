@@ -1,4 +1,6 @@
-const express = require('express')
+require( './db/init' );
+
+express = require('express')
 const app = express();
 const path = require('path');
 const indexRouter = require('./routes/index')
@@ -6,6 +8,9 @@ const workshopsRouter = require('./routes/workshops')
 const apiWorkshopsRouter = require('./routes/api/workshops')
 const {pageNotFound,genericErrorHandler} = require('./middleware/errors')
 const {dateLogger} = require('./middleware/utils')
+
+
+
 
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));

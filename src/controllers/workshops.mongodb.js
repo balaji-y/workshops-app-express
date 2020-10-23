@@ -1,7 +1,4 @@
 const {client } = require('../db/init');
-const mongoose = require('mongoose');
-
-const Workshop = mongoose.model('workshop');
 
 function getWorkshops(){
     const workshops = require('../data/workshops.json');
@@ -15,10 +12,19 @@ function getWorkshopById(id){
     
 }
 
-async function sendWorkshops( req, res ) {
-    try {
-        const workshops = await Workshop.find().exec();
+function sendWorkshopById(req,res){
+    const workshops = require('../data/workshops.json');
+    workshop = workshops.find(workshop => workshop.id === parseInt(req.params.id))
+    res.json(workshop)
+}
 
+async function sendWorkshops( req,res ){
+    const database = client.db('workshops-app');
+    const collection = database.collection('workshops');
+    const query = {};
+
+    try {
+        const workshops = await collection.find( query ).toArray();
         res.json( workshops );
     } catch( error ) {
         res.status( 500 ).json({
@@ -27,17 +33,4 @@ async function sendWorkshops( req, res ) {
     }
 }
 
-
-async function sendWorkshopById(req,res){
-    const id = req.params.id;
-    try{
-        const workshop = await Workshop.findById(id).exec();
-        res.json(workshop);
-    }
-    catch(error){
-        res.status(404).json({
-            message:error.message
-        })
-    }
-}
 module.exports = {getWorkshops,sendWorkshops,getWorkshopById,sendWorkshopById};
