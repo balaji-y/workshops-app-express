@@ -116,7 +116,7 @@ async function deleteWorkshopById(req,res,next){
             res.status(204).send();
         }
         else{
-            const error = new Error('document not exists');
+            const error = new Error('document not exists. enter correct details');
             error.status = 404;
             next(error);
         }
